@@ -16,6 +16,8 @@ body {
   font-family: $font-hei;
   //默认行高
   line-height: 1.5;
+  //默认字体大小
+  font-size: 16px;
 }
 
 </style>
