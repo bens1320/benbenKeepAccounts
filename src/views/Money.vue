@@ -1,30 +1,5 @@
 <template>
-  <Layout>
-    <div>
-      <div class="tags">
-        <ul class="current">
-          <li>衣</li>
-          <li>食</li>
-          <li>住</li>
-          <li>行</li>
-        </ul>
-        <div class="new">
-          <button>新增标签</button>
-        </div>
-      </div>
-    </div>
-    <div>
-      <label class="notes">
-        <span class="name">备注</span>
-        <input type="text" placeholder="请输入备注信息">
-      </label>
-    </div>
-    <div>
-      <ul class="types">
-        <li class="selected">支出</li>
-        <li>收入</li>
-      </ul>
-    </div>
+  <Layout class-prefix="layout">
     <div class="numberPad">
       <div class="output">100001</div>
       <div class="buttons">
@@ -44,6 +19,46 @@
         <button>.</button>
       </div>
     </div>
+    <div>
+      <ul class="types">
+        <li class="selected">支出</li>
+        <li>收入</li>
+      </ul>
+    </div>
+    <div>
+      <label class="notes">
+        <span class="name">备注</span>
+        <input type="text" placeholder="请输入备注信息">
+      </label>
+    </div>
+    <div class="tags">
+      <div class="new">
+        <button>新增标签</button>
+      </div>
+      <ul class="current">
+        <li>衣</li>
+        <li>食</li>
+        <li>住</li>
+        <li>行</li>
+        <li>衣</li>
+        <li>食</li>
+        <li>住</li>
+        <li>行</li>
+        <li>衣</li>
+        <li>食</li>
+        <li>住</li>
+        <li>行</li>
+        <li>衣</li>
+        <li>食</li>
+        <li>住</li>
+        <li>行</li>
+        <li>衣</li>
+        <li>食</li>
+        <li>住</li>
+        <li>行</li>
+      </ul>
+    </div>
+
   </Layout>
 </template>
 
@@ -53,13 +68,26 @@ export default {
 };
 </script>
 
+<style lang="scss">
+//vue deep
+.layout-content{
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+</style>
+
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 .tags{
   font-size: 14px;
   padding: 16px;
+  display: flex;
+  flex-direction: column-reverse;
+  flex-grow: 1;
   > .current{
     display: flex;
+    flex-wrap: wrap;
     > li{
       background: #d9d9d9;
       $h: 24px;
@@ -68,7 +96,7 @@ export default {
       border-radius: $h/2;
       padding: 0 16px;
       margin-right: 12px;
-
+      margin-top: 4px;
     }
   }
 
