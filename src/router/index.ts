@@ -10,10 +10,10 @@ Vue.use(VueRouter);
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    redirect: '/money'
+    redirect: '/Money'
   },
   {
-    path: '/money',
+    path: '/Money',
     component: Money
   },
   {
