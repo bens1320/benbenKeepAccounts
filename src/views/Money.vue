@@ -26,7 +26,7 @@
       </ul>
     </div>
     <div class="numberPad">
-      <div class="output">100</div>
+      <div class="output">1000</div>
       <div class="buttons">
         <button>1</button>
         <button>2</button>
