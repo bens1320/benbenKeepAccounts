@@ -10,17 +10,11 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component, Prop} from 'vue-property-decorator';
+import {Component} from 'vue-property-decorator';
 
 @Component
 export default class Types extends Vue {
   type = '-';
-
-  //Prop 告诉 Vue, xxx不是 data 是 prop
-  //Number 告诉 Vue, xxx 运行时, 是个Number
-  //xxx 属性名
-  //number | undefined 告诉 TS xxx 的编译时的类型
-  @Prop(Number) xxx: number | undefined;
 
   selectType(type: string) {
     if (type !== '-' && type !== '+') {
@@ -29,9 +23,6 @@ export default class Types extends Vue {
     this.type = type;
   }
 
-  mounted() {
-    console.log(this.xxx);
-  }
 }
 </script>
 
