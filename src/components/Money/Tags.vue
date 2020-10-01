@@ -20,6 +20,7 @@ export default class Tags extends Vue {
   @Prop() dataSource: string[] | undefined;
   selectedTags: string[] = [];
 
+
   toggle(tag: string) {
     const index = this.selectedTags.indexOf(tag);
     if (index >= 0) {
@@ -27,6 +28,7 @@ export default class Tags extends Vue {
     } else {
       this.selectedTags.push(tag);
     }
+    this.$emit('update:value', this.selectedTags)
   }
 
   create() {
