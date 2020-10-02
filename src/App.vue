@@ -18,6 +18,7 @@ body {
   line-height: 1.5;
   //默认字体大小
   font-size: 16px;
+  background: #f5f5f5;
 }
 
 </style>
