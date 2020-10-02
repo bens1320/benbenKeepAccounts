@@ -6,7 +6,7 @@
         <Icon name="left"/>
         <span>编辑标签</span>
       </div>
-      <Notes filed-name="标签名" placeholder="标签名内容"/>
+      <FromItem filed-name="标签名" placeholder="标签名内容"/>
     </layout>
   </div>
 </template>
@@ -15,9 +15,9 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import tagListModel from '@/models/tagListModel';
-import Notes from '@/components/Money/Notes.vue';
+import FromItem from '@/components/Money/FromItem.vue';
 @Component({
-  components: {Notes}
+  components: {FromItem}
 })
 export default class EditLabel extends Vue {
   created() {
