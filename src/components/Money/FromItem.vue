@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label class="notes">
+    <label class="fromItem">
       <span class="name">{{ this.filedName }}</span>
       <input type="text" v-model="value" :placeholder="this.placeholder">
     </label>
@@ -17,7 +17,7 @@ import {Component, Prop, Watch} from 'vue-property-decorator';
 export default class FromItem extends Vue {
   value = '';
 
-  @Prop({required: true}) filedName: string;
+  @Prop({required: true}) filedName!: string;
   @Prop() placeholder?: string;
 
   @Watch('value')
@@ -28,8 +28,7 @@ export default class FromItem extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.notes {
-  background: #f5f5f5;
+.fromItem {
   //同外部div 改为block
   //display: block;
   font-size: 14px;
@@ -42,7 +41,7 @@ export default class FromItem extends Vue {
   }
 
   input {
-    line-height: 64px;
+    line-height: 40px;
     flex-grow: 1;
     background: transparent;
     border: none;
