@@ -1,5 +1,5 @@
 <template>
-    <svg class="icon">
+    <svg class="icon" @click="$emit('click', $emit)">
       <!--  v-bind:xlink:href 可简化为 :xlink:href   -->
       <use :xlink:href="'#' + name"></use>
     </svg>
