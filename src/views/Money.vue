@@ -5,7 +5,7 @@
     <div class="notes">
       <FromItem filed-name="备注" placeholder="请输入备注信息" @update:value="onUpdateNotes"/>
     </div>
-    <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
+    <Tags/>
   </Layout>
 </template>
 
@@ -25,7 +25,6 @@ window.localStorage.setItem('version', '0.0.1');
   components: {Tags, FromItem, Types, NumberPad}
 })
 export default class Money extends Vue {
-  tags = store.tagList;
   recordList = store.recordList;
   record: RecordItem = {
     tags: [], notes: '', type: '+', amount: 100
@@ -33,11 +32,6 @@ export default class Money extends Vue {
 
   onUpdateNotes(value: string) {
     this.record.notes = value;
-    console.log(value);
-  }
-
-  onUpdateTags(value: string[]) {
-    this.record.tags = value;
     console.log(value);
   }
 
