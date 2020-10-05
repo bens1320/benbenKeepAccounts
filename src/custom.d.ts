@@ -10,16 +10,3 @@ type Tag = {
   id: string;
   name: string;
 }
-
-type TagListModel = {
-  data: Tag[];
-  fetch: () => Tag[];
-  save: () => void;
-  create: (name: string) => 'success' | 'duplicated'; //联合类型
-  update: (id: string, name: string) => 'success' | 'not found' | 'duplicated';
-  remove: (id: string) => boolean;
-}
-
-//注意Window的大小写
-// interface Window {
-// }
