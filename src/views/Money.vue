@@ -6,6 +6,7 @@
       <FromItem filed-name="备注" placeholder="请输入备注信息" @update:value="onUpdateNotes"/>
     </div>
     <Tags/>
+    {{record}}
   </Layout>
 </template>
 
@@ -22,13 +23,19 @@ window.localStorage.setItem('version', '0.0.1');
 
 
 @Component({
-  components: {Tags, FromItem, Types, NumberPad}
+  components: {Tags, FromItem, Types, NumberPad},
+  computed:{
+    recordList(){
+      return store.recordList;
+    }
+  }
 })
 export default class Money extends Vue {
-  recordList = store.recordList;
   record: RecordItem = {
     tags: [], notes: '', type: '+', amount: 100
   };
+
+
 
   onUpdateNotes(value: string) {
     this.record.notes = value;

@@ -4,6 +4,7 @@
       <button @click="create">新增标签</button>
     </div>
     <ul class="current">
+      {{tagList}}
       <li v-for="tag in tagList" :class="{selected: selectedTags.indexOf(tag.name)>=0}"
           :key="tag.id" @click="toggle(tag.name)">{{ tag.name }}</li>
 
