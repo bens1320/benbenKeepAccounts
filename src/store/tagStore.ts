@@ -1,4 +1,3 @@
-import store from '@/store/index2';
 import createId from '@/lib/createId';
 
 const localStorageKeyName = 'tagList';

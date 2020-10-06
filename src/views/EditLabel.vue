@@ -24,10 +24,19 @@ import FromItem from '@/components/Money/FromItem.vue';
 import Button from '@/components/Button.vue';
 
 @Component({
-  components: {Button, FromItem}
+  components: {Button, FromItem},
+  computed: {
+    tagList() {
+      return this.$store.state.tagList;
+    }
+  }
 })
 export default class EditLabel extends Vue {
   tag?: Tag = undefined;
+
+  beforeCreated() {
+    this.$store.commit('fetchTags');
+  }
 
   created() {
     // TODO
