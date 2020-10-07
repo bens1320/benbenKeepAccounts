@@ -30,7 +30,7 @@ import TagHelper from '@/mixins/TagHelper';
   }
 })
 export default class Labels extends mixins(TagHelper) {
-  Created() {
+  created() {
     this.$store.commit('fetchTags');
   }
 
