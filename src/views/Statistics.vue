@@ -3,9 +3,21 @@
     <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"/>
     <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval"/>
     <div>
-      type: {{type}}
+      type: {{ type }}
       <br>
-      interval: {{interval}}
+      interval: {{ interval }}
+    </div>
+    <div>
+      <ol>
+        <li v-for="(group, index) in result" :key="index">
+          <h3>{{group.title}}</h3>
+          <ol>
+            <li v-for="(item, index) in group.items" :key="index">
+              {{item.amount}} {{item.createdAt}}
+            </li>
+          </ol>
+        </li>
+      </ol>
     </div>
   </Layout>
 </template>
@@ -22,29 +34,55 @@ import intervalList from '@/constants/intervalList';
 
 })
 export default class Statistics extends Vue {
+  get recordList() {
+    return (this.$store.state as RootState).recordList;
+  }
+
+  get result() {
+    const {recordList} = this;
+    type HashTableValue = {title: string; items: RecordItem[]}
+    const hashTable: {[key: string]: HashTableValue[]} = {};
+    for (let i = 0; i < recordList.length; i++) {
+      const [date, ] = recordList[i].createdAt.split('T');
+      hashTable[date] = hashTable[date] || {title: date, items: []};
+      hashTable[date].items.push(recordList[i])
+    }
+    console.log(hashTable);
+    return hashTable;
+  }
+
+  beforeCreate() {
+    this.$store.commit('fetchRecords');
+  }
+
+
   type = '-';
-  interval= 'day'
-  recordTypeList = recordTypeList
-  intervalList = intervalList
+  interval = 'day';
+  recordTypeList = recordTypeList;
+  intervalList = intervalList;
 
 
 }
 </script>
 
 <style lang="scss" scoped>
-::v-deep .type-tabs-item {
-  background: white;
+::v-deep {
+  .type-tabs-item {
+    background: white;
 
-  &.selected {
-    background: #c4c4c4;
+    &.selected {
+      background: #c4c4c4;
 
-    &::after {
-      display: none;
+      &::after {
+        display: none;
+      }
     }
+  }
+
+  .interval-tabs-item {
+    height: 48px;
   }
 }
 
-::v-deep .interval-tabs-item {
-  height: 48px;
-}
+
 </style>
