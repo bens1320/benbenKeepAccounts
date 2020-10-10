@@ -1,7 +1,7 @@
 <template>
   <ul class="tabs">
     <li v-for="item in dataSource" :key="item.value"
-        :class="liClass(item)"
+        :class="{[classPrefix + '-tabs-item']: classPrefix, selected: item.value === value}"
         @click="select(item)">{{ item.text }}
     </li>
   </ul>
@@ -11,7 +11,7 @@
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
 
-type DataSourceItem = { text: string; value: string[] }
+type DataSourceItem = { text: string; value: string }
 
 @Component
 export default class Tabs extends Vue {
@@ -21,9 +21,6 @@ export default class Tabs extends Vue {
   @Prop(String) classPrefix?: string;
 
   liClass(item: DataSourceItem) {
-    // console.log(this.dataSource);
-    // console.log(this.value);
-    // console.log(item.value);
     return {
       [this.classPrefix + '-tabs-item']: this.classPrefix,
       selected: item.value === this.value
