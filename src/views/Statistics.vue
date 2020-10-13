@@ -1,9 +1,9 @@
 <template>
   <Layout>
     <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"/>
-    <ol>
+    <ol v-if="groupedList.length > 0">
       <li v-for="(group, index) in groupedList" :key="index">
-        <h3 class="title">{{ beautify(group.title) }} <span>￥{{group.total}}</span></h3>
+        <h3 class="title">{{ beautify(group.title) }} <span>￥{{ group.total }}</span></h3>
         <ol>
           <li v-for="item in group.items" :key="item.id"
               class="record"
@@ -15,6 +15,9 @@
         </ol>
       </li>
     </ol>
+    <div v-else class="noResult">
+      目前没有相关数据
+    </div>
   </Layout>
 </template>
 
@@ -48,7 +51,7 @@ export default class Statistics extends Vue {
   }
 
   tagString(tags: Tag[]) {
-    return tags.length === 0 ? '无' : tags.join(',');
+    return tags.length === 0 ? '无' : tags.join('，');
   }
 
   get recordList() {
@@ -57,11 +60,10 @@ export default class Statistics extends Vue {
 
   get groupedList() {
     const {recordList} = this;
-    if (recordList.length === 0) {return [];}
     const newList = clone(recordList)
         .filter(r => r.type === this.type)
         .sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
-
+    if (newList.length === 0) {return [];}
     type Result = {title: string; total?: number; items: RecordItem[]}[]
     const result: Result = [{title: dayjs(newList[0].createdAt).format('YYYY-M-D'), items: [newList[0]]}];
     for (let i = 1; i < newList.length; i++) {
@@ -76,7 +78,6 @@ export default class Statistics extends Vue {
     result.map(group => {
       group.total = group.items.reduce((sum, item) => sum + item.amount, 0)
     })
-    console.log(result);
     return result;
   }
 
@@ -92,6 +93,11 @@ export default class Statistics extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.noResult {
+  padding: 48px;
+  text-align: center;
+}
+
 %item {
   padding: 8px 16px;
   line-height: 24px;
@@ -99,6 +105,7 @@ export default class Statistics extends Vue {
   justify-content: space-between;
   align-content: center;
 }
+
 .title {
   @extend %item;
 }

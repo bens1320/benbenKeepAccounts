@@ -5,9 +5,9 @@
           :value.sync="record.type"
     />
     <div class="notes">
-      <FromItem filed-name="备注" placeholder="请输入备注信息" @update:value="onUpdateNotes"/>
+      <FromItem filed-name="备注" placeholder="请输入备注信息" :value.sync="record.notes"/>
     </div>
-    <Tags/>
+    <Tags @update:value="record.tags = $event"/>
   </Layout>
 </template>
 
@@ -34,20 +34,22 @@ export default class Money extends Vue {
   recordTypeList = recordTypeList;
 
   record: RecordItem = {
-    tags: [], notes: '', type: '+', amount: 100
+    tags: [], notes: '', type: '-', amount: 0
   };
 
   created() {
     this.$store.commit('fetchRecords');
   }
 
-  onUpdateNotes(value: string) {
-    this.record.notes = value;
-    console.log(value);
-  }
-
   saveRecord() {
+    if (!this.record.tags || this.record.tags.length === 0) {
+      return window.alert('至少选择一个标签');
+    }
     this.$store.commit('createRecord', this.record);
+    if (this.$store.state.createRecordError === null) {
+      window.alert('已保存');
+      this.record.notes = '';
+    }
   }
 
 }
