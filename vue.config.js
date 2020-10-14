@@ -3,6 +3,9 @@ const path = require('path')
 
 
 module.exports = {
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/benbenKeepAccounts-website/'
+    : '/',
   lintOnSave: false,
 
   chainWebpack: config => {
