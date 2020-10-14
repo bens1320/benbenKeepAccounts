@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app">
     <router-view/>
   </div>
 </template>
@@ -20,6 +20,12 @@ body {
   //默认字体大小
   font-size: 16px;
   background: #f5f5f5;
+}
+
+#app {
+  // 500px 是经验
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 </style>
