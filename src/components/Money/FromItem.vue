@@ -2,17 +2,25 @@
   <div>
     <label class="fromItem">
       <span class="name">{{ filedName }}</span>
-      <input type="text" :value="value" @input="onValueChanged($event.target.value)"
-             :placeholder="placeholder">
+      <template v-if=" type === 'date'">
+        <input type="date" :value="x(value)"
+               @input="onValueChanged($event.target.value)"
+               :placeholder="placeholder">
+      </template>
+      <template v-else>
+        <input type="text" :value="value"
+               @input="onValueChanged($event.target.value)"
+               :placeholder="placeholder">
+      </template>
     </label>
   </div>
-
 
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
+import dayjs from 'dayjs';
 
 @Component
 export default class FromItem extends Vue {
@@ -20,9 +28,15 @@ export default class FromItem extends Vue {
 
   @Prop({required: true}) filedName!: string;
   @Prop() placeholder?: string;
+  @Prop() type?: string;
+
 
   onValueChanged(value: string) {
     this.$emit('update:value', value);
+  }
+
+  x(isoString: string) {
+    return dayjs(isoString).format('YYYY-MM-DD');
   }
 }
 </script>

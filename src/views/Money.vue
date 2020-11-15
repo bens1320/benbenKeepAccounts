@@ -7,6 +7,9 @@
     <div class="notes">
       <FromItem filed-name="备注" placeholder="请输入备注信息" :value.sync="record.notes"/>
     </div>
+    <div class="createdAt">
+      <FromItem filed-name="日期" type="date" placeholder="请输入日期" :value.sync="record.createdAt"/>
+    </div>
     <Tags @update:value="record.tags = $event"/>
   </Layout>
 </template>
@@ -34,7 +37,7 @@ export default class Money extends Vue {
   recordTypeList = recordTypeList;
 
   record: RecordItem = {
-    tags: [], notes: '', type: '-', amount: 0
+    tags: [], notes: '', type: '-', amount: 0, createdAt: new Date().toISOString()
   };
 
   created() {
