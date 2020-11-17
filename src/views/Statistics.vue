@@ -83,6 +83,11 @@ export default class Statistics extends Vue {
         show: false
       },
       series: [{
+        symbolSize: 10,
+        itemStyle: {
+          borderWidth: 1,
+          radius: 10
+        },
         data: [
           1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
           11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
@@ -186,6 +191,9 @@ export default class Statistics extends Vue {
   width: 430%;
   &-wrapper{
     overflow: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 </style>
