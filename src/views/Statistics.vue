@@ -101,6 +101,9 @@ export default class Statistics extends Vue {
       }],
       tooltip: {
         show: true,
+        triggerOn: 'click',
+        position: 'top',
+        formatter: '{c}'
       }
     };
   }
