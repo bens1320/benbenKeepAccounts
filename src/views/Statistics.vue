@@ -62,6 +62,7 @@ export default class Statistics extends Vue {
   }
 
   mounted() {
+    console.log(this.groupedList)
     const div = (this.$refs.chartWrapper as HTMLDivElement);
     div.scrollLeft = div.scrollWidth;
   }
@@ -71,10 +72,10 @@ export default class Statistics extends Vue {
     const array = [];
     for (let i = 0; i <= 29; i++) {
       const date = dayjs(today).subtract(i, 'day').format('YYYY-MM-DD');
-      const found = _.find(this.recordList, {
-        createdAt: date,
+      const found = _.find(this.groupedList, {
+        title: date,
       });
-      array.push({date: date, amount: found ? found.amount : 0});
+      array.push({date: date, amount: found ? found.total : 0});
     }
     array.sort((a, b) => {
       if (a > b) {
@@ -103,7 +104,7 @@ export default class Statistics extends Vue {
         axisTick: {alignWithLabel: true},
         axisLine: {lineStyle: {color: '#666'}},
         axisLabel: {
-          formatter: function (value) {
+          formatter: function (value: string) {
             return value.substr(5);
           }
         }
