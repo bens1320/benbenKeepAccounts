@@ -90,7 +90,9 @@ export default class Statistics extends Vue {
   }
 
   get chartOptions() {
-
+    console.log('dateAmountList1');
+    console.log(this.dateAmountList);
+    console.log('dateAmountList2');
     const keys = this.dateAmountList.map(item => item.date);
     const values = this.dateAmountList.map(item => item.amount);
     return {
